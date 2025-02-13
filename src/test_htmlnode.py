@@ -1,6 +1,6 @@
 import unittest
 
-from htmlnode import HTMLNode
+from htmlnode import HTMLNode, LeafNode
 
 class TestHTMLNode(unittest.TestCase):
     def test_eq(self):
@@ -63,6 +63,14 @@ class TestHTMLNode(unittest.TestCase):
             node.__repr__(),
             "HTMLNode p, Welcome, Welcome, children: None, {'class': 'secondary'}",
         )
+
+    def test_to_html_no_children(self):
+        node = LeafNode("p", "Hello, weird world!")
+        self.assertEqual(node.to_html(), "<p>Hello, weird world!</p>")
+
+    def test_to_html_no_tag(self):
+        node = LeafNode(None, "Hello, weird world!")
+        self.assertEqual(node.to_html(), "Hello, weird world!")
 
 if __name__ == "__main__":
     unittest.main()
